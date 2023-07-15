@@ -1,7 +1,7 @@
-import Test from "@/components/test";
 import getWeather from "./(apis)/api";
+import WeatherBox from "@/components/weather_box";
 
 export default async function App() {
   const initialData = await getWeather(12, 12);
-  return <Test initialData={initialData} />;
+  return <WeatherBox initialData={initialData} />;
 }
