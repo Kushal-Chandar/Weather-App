@@ -1,7 +1,11 @@
-import getWeather from "./(apis)/api";
 import WeatherBox from "@/components/weather_box";
+import SearchBar from "@/components/search_bar";
 
 export default async function App() {
-  const initialData = await getWeather(12, 12);
-  return <WeatherBox initialData={initialData} />;
+  return (
+    <>
+      <SearchBar />
+      <WeatherBox />
+    </>
+  );
 }
