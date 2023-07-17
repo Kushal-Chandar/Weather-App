@@ -28,6 +28,55 @@ export default async function getWeather(lat: number, lon: number) {
   };
 }
 
+export const weather_conditions: Record<
+  number,
+  { description: string; image: string }
+> = {
+  0: {
+    description: "Clear Sky",
+    image: "clear",
+  },
+  1: {
+    description: "Mostly clear",
+    image: "clear",
+  },
+  2: { description: "Partly Cloudy", image: "partly-cloudy" },
+  3: { description: "Overcast", image: "overcast" },
+  45: { description: "Fog", image: "fog" },
+  48: { description: "Depositing Rime fog", image: "rim-fog" },
+  51: { description: "Light Drizzle", image: "drizzle" },
+  53: { description: "Moderate Drizzle", image: "moderate-drizzle" },
+  55: { description: "Dense Drizzle", image: "extreme-drizzle" },
+  56: { description: "Light Freezing Drizzle", image: "sleet" },
+  57: { description: "Dense Freezing Drizzle", image: "extreme-sleet" },
+  61: { description: "Slight Rain", image: "rain" },
+  63: { description: "Moderate Rain", image: "moderate-rain" },
+  65: { description: "Heavy Rain", image: "extreme-rain" },
+  66: { description: "Light Freezing Rain", image: "sleet" },
+  67: { description: "Heavy Freezing Rain", image: "extreme-sleet" },
+  71: { description: "Slight Snowfall", image: "snow" },
+  73: { description: "Moderate Snowfall", image: "moderate-snow" },
+  75: { description: "Heavy Snowfall", image: "extreme-snow" },
+  77: { description: "Snow Grains", image: "snowman" },
+  80: { description: "Slight Rain Showers", image: "rain" },
+  81: { description: "Moderate Rain Showers", image: "moderate-rain" },
+  82: { description: "Violent Rain Showers", image: "extreme-rain" },
+  85: { description: "Slight Snow Showers", image: "snow" },
+  86: { description: "Heavy Snow Showers", image: "extreme-snow" },
+  95: { description: "Thunderstorms", image: "thunderstorms" },
+  96: {
+    description: "Thunderstorms with Slight Hail/Rain",
+    image: "thunderstorms-rain",
+  },
+  99: {
+    description: "Thunderstorms with Heavy Hail/Rain",
+    image: "extreme-thunderstorms-rain",
+  },
+
+  // Default/Fallback value
+  [Symbol.for("unknown")]: { description: "N/A", image: "not-available" },
+};
+
 export interface CurrentWeatherType {
   temperature: number;
   temperature_max: number;

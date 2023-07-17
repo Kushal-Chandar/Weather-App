@@ -7,7 +7,7 @@ import HourlyForecast from "./weather_box/hourly_forecast";
 import DailyForecast from "./weather_box/daily_forecast";
 import Error from "./utilities/error";
 import { AxiosError } from "axios";
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import Loading from "./utilities/loading";
 import getCityName from "@/app/(apis)/geocoding";
 
@@ -55,7 +55,6 @@ function WeatherBox(props: {
   useEffect(() => {
     if (!props.placeSearched) {
       refetch();
-      console.log("fetch");
     }
   }, [props.placeSearched, refetch, nav]);
 

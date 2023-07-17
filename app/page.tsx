@@ -12,9 +12,11 @@ export default function App() {
     place: "",
   });
   return (
-    <>
-      <SearchBar setPlaceSearched={setPlaceSearched} setPlace={setPlace} />
-      <WeatherBox placeSearched={placeSearched} place={place} />
-    </>
+    <div className="flex justify-center items-center h-screen">
+      <div className="bg-blue-300 max-w-md shadow-md rounded-lg mx-auto p-6">
+        <SearchBar setPlaceSearched={setPlaceSearched} setPlace={setPlace} />
+        <WeatherBox placeSearched={placeSearched} place={place} />
+      </div>
+    </div>
   );
 }
