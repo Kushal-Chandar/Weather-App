@@ -1,4 +1,4 @@
-import { DailyForecastType } from "@/app/(apis)/weather_api";
+import { DailyForecastType } from "@/app/(apis)/weather";
 
 function DailyForecast(props: { data: DailyForecastType }) {
   return (

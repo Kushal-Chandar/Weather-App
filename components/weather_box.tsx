@@ -1,53 +1,116 @@
 "use client";
 
-import getWeather from "@/app/(apis)/weather_api";
+import getWeather from "@/app/(apis)/weather";
 import { useQuery } from "@tanstack/react-query";
 import CurrentWeather from "./weather_box/current_weather";
 import HourlyForecast from "./weather_box/hourly_forecast";
 import DailyForecast from "./weather_box/daily_forecast";
 import Error from "./utilities/error";
 import { AxiosError } from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import Loading from "./utilities/loading";
+import getCityName from "@/app/(apis)/geocoding";
 
-function WeatherBox() {
-  const [coords, setCoords] = useState({ lat: 37.7749, lon: -122.4194 });
+function WeatherBox(props: {
+  placeSearched: boolean;
+  place: {
+    lat: number;
+    lon: number;
+    place: string;
+  };
+}) {
+  const [nav, setNav] = useState({
+    lat: 37.7749,
+    lon: -122.4194,
+  });
+  const [locationEnabled, setLocationEnabled] = useState(false);
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setNav({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+        setLocationEnabled(true);
+      },
+      (error) => {
+        console.error(error);
+        setLocationEnabled(false);
+      }
+    );
+  }, []);
 
-  try {
-    navigator.geolocation.getCurrentPosition((position) => {
-      setCoords({
-        lat: position.coords.latitude,
-        lon: position.coords.longitude,
-      });
-    });
-  } catch (error) {
-    console.log(error);
-    console.log("Using fall back location: " + coords.lat + ", " + coords.lon);
-  }
+  const {
+    data: city,
+    isError: isErrorCity,
+    isLoading: isLoadingCity,
+    error: errorCity,
+    refetch,
+  } = useQuery({
+    queryKey: ["city", { lat: nav.lat, lon: nav.lon }],
+    queryFn: () => getCityName(nav.lat, nav.lon),
+    enabled: false,
+  });
 
-  const { data, isError, isLoading, error } = useQuery({
-    queryKey: ["weather", { lat: coords.lat, lon: coords.lon }],
-    queryFn: () => getWeather(coords.lat, coords.lon),
+  useEffect(() => {
+    if (!props.placeSearched) {
+      refetch();
+      console.log("fetch");
+    }
+  }, [props.placeSearched, refetch, nav]);
+
+  const { lat, lon } = props.placeSearched ? props.place : nav;
+
+  const {
+    data,
+    isError: isErrorData,
+    isLoading: isLoadingData,
+    error: errorData,
+  } = useQuery({
+    queryKey: ["weather", { lat: lat, lon: lon }],
+    queryFn: () => getWeather(lat, lon),
     refetchInterval: 1000 * 60 * 15, // automatically update every 15 mins
-    // remove this
-    refetchIntervalInBackground: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
-    refetchOnWindowFocus: false,
-    // remove this
     staleTime: 1000 * 60 * 10, // data is made stale every 10 mins, will refetch if user on site
   });
-  if (isError) {
-    return <Error error={error as AxiosError} />;
+  if (!props.placeSearched) {
+    if (isErrorCity) {
+      return <Error error={errorCity as AxiosError} />;
+    }
+    if (isLoadingCity) {
+      return <Loading />;
+    }
   }
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (isErrorData) {
+    return <Error error={errorData as AxiosError} />;
   }
+  if (isLoadingData) {
+    return <Loading />;
+  }
+
   return (
-    <>
-      <CurrentWeather data={data.current} />
+    <div className="flex flex-col justify-center items-center">
+      <CurrentWeather
+        data={data.current}
+        place={props.placeSearched ? props.place.place : city.address.city}
+      />
       <HourlyForecast data={data.hourly} />
       <DailyForecast data={data.daily} />
-    </>
+      <div>
+        {!locationEnabled
+          ? "Location Disabled: To get Accurate weather information regarding your location please enable location and refresh this page."
+          : ""}{" "}
+        {!locationEnabled && (
+          <button
+            className="border hover:bg-slate-400 rounded"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Refresh Page
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 

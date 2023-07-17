@@ -1,4 +1,4 @@
-import { HourlyForecastType } from "@/app/(apis)/weather_api";
+import { HourlyForecastType } from "@/app/(apis)/weather";
 
 function HourlyForecast(props: { data: HourlyForecastType }) {
   return (

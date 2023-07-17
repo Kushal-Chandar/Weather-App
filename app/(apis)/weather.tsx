@@ -1,8 +1,6 @@
 "use client"; // Prevents hitting the API rate limit ???
 
 import axios from "axios";
-import getCityName from "./geocoding_api";
-import { useQuery } from "@tanstack/react-query";
 
 export default async function getWeather(lat: number, lon: number) {
   const response = await axios.get("https://api.open-meteo.com/v1/forecast", {
@@ -36,8 +34,6 @@ export interface CurrentWeatherType {
   temperature_min: number;
   weathercode: number;
   is_day: boolean;
-  latitude: number;
-  longitude: number;
 }
 
 export interface HourlyForecastType {
@@ -87,8 +83,6 @@ interface DailyForecastInternalType {
 function getCurrentWeather(data: {
   current_weather: CurrentWeatherInternalType;
   daily: DailyForecastInternalType;
-  latitude: number;
-  longitude: number;
 }) {
   const { temperature, weathercode, is_day } = data.current_weather;
   const { temperature_2m_max, temperature_2m_min } = data.daily;
@@ -100,8 +94,6 @@ function getCurrentWeather(data: {
     temperature_min,
     weathercode,
     is_day,
-    latitude: data.latitude,
-    longitude: data.longitude,
   };
 }
 
@@ -188,6 +180,7 @@ function getDailyWeather(data: { daily: DailyForecastInternalType }) {
       new Date(value)
     )
   );
+  new_time[0] = "Today";
   return {
     time: new_time,
     weathercode,
