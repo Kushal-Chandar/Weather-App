@@ -19,6 +19,7 @@ export default async function getWeather(lat: number, lon: number) {
         "uv_index_max",
         "precipitation_probability_max",
       ],
+      models: "best_match",
     },
   });
   return {
@@ -37,28 +38,28 @@ export const weather_conditions: Record<
     image: "clear",
   },
   1: {
-    description: "Mostly clear",
+    description: "Mostly Clear",
     image: "clear",
   },
   2: { description: "Partly Cloudy", image: "partly-cloudy" },
   3: { description: "Overcast", image: "overcast" },
   45: { description: "Fog", image: "fog" },
   48: { description: "Depositing Rime fog", image: "rim-fog" },
-  51: { description: "Light Drizzle", image: "drizzle" },
+  51: { description: "Drizzle", image: "drizzle" },
   53: { description: "Moderate Drizzle", image: "moderate-drizzle" },
   55: { description: "Dense Drizzle", image: "extreme-drizzle" },
-  56: { description: "Light Freezing Drizzle", image: "sleet" },
+  56: { description: "Freezing Drizzle", image: "sleet" },
   57: { description: "Dense Freezing Drizzle", image: "extreme-sleet" },
-  61: { description: "Slight Rain", image: "rain" },
+  61: { description: "Rain", image: "rain" },
   63: { description: "Moderate Rain", image: "moderate-rain" },
   65: { description: "Heavy Rain", image: "extreme-rain" },
-  66: { description: "Light Freezing Rain", image: "sleet" },
+  66: { description: "Freezing Rain", image: "sleet" },
   67: { description: "Heavy Freezing Rain", image: "extreme-sleet" },
-  71: { description: "Slight Snowfall", image: "snow" },
+  71: { description: "Snowfall", image: "snow" },
   73: { description: "Moderate Snowfall", image: "moderate-snow" },
   75: { description: "Heavy Snowfall", image: "extreme-snow" },
   77: { description: "Snow Grains", image: "snowman" },
-  80: { description: "Slight Rain Showers", image: "rain" },
+  80: { description: "Rain Showers", image: "rain" },
   81: { description: "Moderate Rain Showers", image: "moderate-rain" },
   82: { description: "Violent Rain Showers", image: "extreme-rain" },
   85: { description: "Slight Snow Showers", image: "snow" },
@@ -205,12 +206,19 @@ function getHourlyWeather(data: {
   }
 
   newHourlyData.time = newHourlyData.time.map((value) =>
-    new Intl.DateTimeFormat("en-US", { timeStyle: "short" }).format(
-      new Date(value)
-    )
+    new Intl.DateTimeFormat("en-US", {
+      timeStyle: "short",
+    })
+      .format(new Date(value))
+      .replace(/\s/g, "")
+      .replace(/:00/g, "")
   );
 
-  newHourlyData.time[0] = "now";
+  newHourlyData.time[0] = "Now";
+  newHourlyData.precipitation_probability =
+    newHourlyData.precipitation_probability.map(
+      (value) => Math.floor(value / 10) * 10
+    );
 
   return newHourlyData;
 }
@@ -229,13 +237,16 @@ function getDailyWeather(data: { daily: DailyForecastInternalType }) {
       new Date(value)
     )
   );
+
   new_time[0] = "Today";
   return {
     time: new_time,
     weathercode,
     temperature_max,
     temperature_min,
-    uv_index_max,
-    precipitation_probability_max,
+    uv_index_max: uv_index_max.map((value) => Math.round(value)),
+    precipitation_probability_max: precipitation_probability_max.map(
+      (value) => Math.floor(value / 10) * 10
+    ),
   };
 }

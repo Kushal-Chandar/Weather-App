@@ -2,8 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-:root, body, html {
-width: 100%;
-height: 100%;
-background: lightblue;
+:root,
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background: lightblue;
+  color: white
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 20px;
+    height: 5px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    opacity: 95;
+    background: rgb(183, 183, 183);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    opacity: 50;
+    background: grey;
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    opacity: 70;
+    background: grey;
+  }
 }

@@ -43,6 +43,7 @@ export default function SearchBar(props: {
 
   return (
     <AsyncPaginate
+      className="w-3/4"
       placeholder="Search location..."
       loadOptions={useSearchOptions}
       debounceTimeout={100}

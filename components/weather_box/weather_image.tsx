@@ -5,6 +5,9 @@ import { weather_conditions } from "@/app/(apis)/weather";
 export default function WeatherImage(props: {
   is_day?: boolean;
   weathercode: number;
+  width: number;
+  height: number;
+  className?: string;
 }) {
   const imagePath = () => {
     var fixed_path: string = `/weather-icons/${
@@ -15,16 +18,13 @@ export default function WeatherImage(props: {
     }
     return fixed_path + ".svg";
   };
-  console.log(imagePath());
   return (
     <Image
       src={imagePath()}
       alt={weather_conditions[props.weathercode].description}
-      onError={() => {
-        console.log("couldn't load image");
-      }}
-      width={100}
-      height={100}
+      className={props.className}
+      width={props.width}
+      height={props.height}
     ></Image>
   );
 }

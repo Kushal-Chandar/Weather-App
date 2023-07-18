@@ -18,6 +18,7 @@ function WeatherBox(props: {
     lon: number;
     place: string;
   };
+  is_celsius: boolean;
 }) {
   const [nav, setNav] = useState({
     lat: 37.7749,
@@ -33,8 +34,7 @@ function WeatherBox(props: {
         });
         setLocationEnabled(true);
       },
-      (error) => {
-        console.error(error);
+      () => {
         setLocationEnabled(false);
       }
     );
@@ -69,7 +69,7 @@ function WeatherBox(props: {
     queryKey: ["weather", { lat: lat, lon: lon }],
     queryFn: () => getWeather(lat, lon),
     refetchInterval: 1000 * 60 * 15, // automatically update every 15 mins
-    staleTime: 1000 * 60 * 10, // data is made stale every 10 mins, will refetch if user on site
+    staleTime: 1000 * 60 * 5, // data is made stale every 10 mins, will refetch if user on site
   });
   if (!props.placeSearched) {
     if (isErrorCity) {
@@ -91,10 +91,11 @@ function WeatherBox(props: {
       <CurrentWeather
         data={data.current}
         place={props.placeSearched ? props.place.place : city.address.city}
+        is_celsius={props.is_celsius}
       />
-      <HourlyForecast data={data.hourly} />
-      <DailyForecast data={data.daily} />
-      <div>
+      <HourlyForecast data={data.hourly} is_celsius={props.is_celsius} />
+      <DailyForecast data={data.daily} is_celsius={props.is_celsius} />
+      <div className="text-justify w-full">
         {!locationEnabled
           ? "Location Disabled: To get Accurate weather information regarding your location please enable location and refresh this page."
           : ""}{" "}
