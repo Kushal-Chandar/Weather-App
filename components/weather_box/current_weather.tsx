@@ -8,27 +8,33 @@ function CurrentWeather(props: {
   place: string;
   is_celsius: boolean;
 }) {
-  const { temperature, temperature_max, temperature_min, weathercode, is_day } =
-    props.data;
+  const {
+    temperature,
+    temperature_max,
+    temperature_min,
+    weathercode,
+    is_day,
+    time,
+  } = props.data;
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center mt-3">
       <div className="text-2xl">{props.place}</div>
-      <Temperature
-        classname="text-7xl pl-7"
-        temperature={temperature}
-        is_celsius={props.is_celsius}
-      />
-      <div>
+      <div className="flex flex-col justify-center items-center">
         <WeatherImage
-          width={50}
-          height={50}
+          width={90}
+          height={90}
           className="scale-150"
           is_day={is_day}
           weathercode={weathercode}
         />
+        <div>{weather_conditions[weathercode].description}</div>
+        <Temperature
+          classname="text-2xl text-center pl-2"
+          temperature={temperature}
+          is_celsius={props.is_celsius}
+        />
       </div>
-      <div>{weather_conditions[weathercode].description}</div>
       <div className="flex flex-row gap-x-2">
         <div className="flex flex-row">
           <p>H:</p>

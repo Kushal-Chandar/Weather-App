@@ -95,21 +95,18 @@ function WeatherBox(props: {
       />
       <HourlyForecast data={data.hourly} is_celsius={props.is_celsius} />
       <DailyForecast data={data.daily} is_celsius={props.is_celsius} />
-      <div className="text-justify w-full">
-        {!locationEnabled
-          ? "Location Disabled: To get Accurate weather information regarding your location please enable location and refresh this page."
-          : ""}{" "}
-        {!locationEnabled && (
-          <button
-            className="border hover:bg-slate-400 rounded"
-            onClick={() => {
-              window.location.reload();
-            }}
-          >
-            Refresh Page
-          </button>
-        )}
-      </div>
+      <div className="text-sm mt-5">{"LAST UPDATE: " + data.time}</div>
+      {!locationEnabled && (
+        <button
+          className="border hover:bg-neutral-200 hover:text-neutral-800 rounded mt-5 p-1"
+          onClick={() => {
+            window.location.reload();
+          }}
+          title="Click to Refresh page"
+        >
+          !!! Location Disabled !!!
+        </button>
+      )}
     </div>
   );
 }

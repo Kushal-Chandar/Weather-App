@@ -23,6 +23,7 @@ export default async function getWeather(lat: number, lon: number) {
     },
   });
   return {
+    time: getTime(response.data),
     current: getCurrentWeather(response.data),
     hourly: getHourlyWeather(response.data),
     daily: getDailyWeather(response.data),
@@ -145,6 +146,16 @@ function getCurrentWeather(data: {
     weathercode,
     is_day,
   };
+}
+
+function getTime(data: { current_weather: CurrentWeatherInternalType }) {
+  const { time } = data.current_weather;
+  return new Intl.DateTimeFormat("en-US", {
+    timeStyle: "short",
+  })
+    .format(new Date(time))
+    .replace(/\s/g, "")
+    .replace(/:00/g, "");
 }
 
 function getHourlyWeather(data: {

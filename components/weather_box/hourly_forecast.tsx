@@ -35,12 +35,12 @@ function HourlyForecast(props: {
     props.data;
   return (
     <div className="mt-5 max-w-sm w-full p-4 bg-white bg-opacity-20 backdrop-blur-lg rounded-lg drop-shadow-lg">
-      <p className="-mt-2 pb-2 text-xs text-neutral-400">
+      <p className="-mt-2 pb-2 text-xs text-neutral-200">
         <LuClock9 className="inline-block -mt-0.5" /> HOURLY FORECAST
       </p>
       <ul
         ref={containerRef}
-        className="flex flex-row gap-x-5 items-center overflow-x-auto list-none scrollbar"
+        className="flex flex-row gap-x-5 items-center overflow-x-auto list-none"
       >
         {time.map((_, idx) => {
           return (

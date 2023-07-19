@@ -18,7 +18,7 @@ function DailyForecast(props: {
   } = props.data;
   return (
     <div className="mt-5 max-w-sm w-full p-4 bg-white bg-opacity-20 backdrop-blur-lg rounded-lg drop-shadow-lg">
-      <p className="-mt-2 pb-2 text-xs text-neutral-400">
+      <p className="-mt-2 pb-2 text-xs text-neutral-200">
         <BsCalendar3 className="inline-block -mt-0.5 mr-1" /> {time.length}
         -DAY FORECAST
       </p>

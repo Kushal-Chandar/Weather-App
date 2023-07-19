@@ -22,7 +22,7 @@ export default function TemperatureToggle(props: {
       <button
         title="Toggle Unit"
         onClick={props.onClick}
-        className="border rounded hover:bg-blue-400 h-9 w-9 shadow overflow-hidden p-0"
+        className="border rounded hover:bg-neutral-200 h-[2.35rem] w-[2.35rem] shadow"
       >
         <UnitImage image={props.is_celsius ? "celsius" : "fahrenheit"} />
       </button>

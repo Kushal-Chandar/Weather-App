@@ -14,8 +14,8 @@ export default function App() {
     place: "",
   });
   return (
-    <div className="flex flex-col h-screen">
-      <div className="bg-blue-300 max-w-md shadow-md rounded-lg mx-auto p-6 w-screen">
+    <div className="flex flex-col">
+      <div className="bg-cyan-600 max-w-md shadow-md rounded-lg mx-auto p-6 w-screen">
         <div className="flex flex-row justify-center items-center w-full gap-x-1">
           <SearchBar setPlaceSearched={setPlaceSearched} setPlace={setPlace} />
           <TemperatureToggle
