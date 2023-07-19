@@ -8,14 +8,8 @@ function CurrentWeather(props: {
   place: string;
   is_celsius: boolean;
 }) {
-  const {
-    temperature,
-    temperature_max,
-    temperature_min,
-    weathercode,
-    is_day,
-    time,
-  } = props.data;
+  const { temperature, temperature_max, temperature_min, weathercode, is_day } =
+    props.data;
 
   return (
     <div className="flex flex-col justify-center items-center mt-3">
