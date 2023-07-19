@@ -13,12 +13,12 @@ function CurrentWeather(props: {
 
   return (
     <div className="flex flex-col justify-center items-center mt-3">
-      <div className="text-2xl">{props.place}</div>
       <div className="flex flex-col justify-center items-center">
+        <div className="text-2xl">{props.place}</div>
         <WeatherImage
           width={90}
           height={90}
-          className="scale-150"
+          className="scale-150 my-1.5"
           is_day={is_day}
           weathercode={weathercode}
         />

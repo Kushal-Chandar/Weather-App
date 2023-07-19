@@ -98,13 +98,18 @@ function WeatherBox(props: {
       <div className="text-sm mt-5">{"LAST UPDATE: " + data.time}</div>
       {!locationEnabled && (
         <button
-          className="border hover:bg-neutral-200 hover:text-neutral-800 rounded mt-5 p-1"
+          className="border bg-neutral-200 text-neutral-800 w-full mt-5 rounded p-1"
           onClick={() => {
-            window.location.reload();
+            setLocationEnabled(true); // prevents rendering this button, make a new state??
           }}
-          title="Click to Refresh page"
+          title="Click to Close"
         >
-          !!! Location Disabled !!!
+          <p className="text-xl"> ⚠ Location Disabled ⚠</p>
+          <p className="text-md">
+            Please allow location permission for this app to get accurate
+            results.
+          </p>
+          <p className="text-sm hover:text-neutral-600">*Touch to close*</p>
         </button>
       )}
     </div>
