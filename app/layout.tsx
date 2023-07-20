@@ -42,6 +42,12 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    url: "https://weatherapp-kushal-chandar.vercel.app",
+    images: [
+      {
+        url: "icon-512x512.png",
+      },
+    ],
   },
   twitter: {
     card: "summary",
@@ -50,6 +56,11 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: [
+      {
+        url: "icon-512x512.png",
+      },
+    ],
   },
 };
 
