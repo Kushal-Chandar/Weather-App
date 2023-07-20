@@ -5,9 +5,52 @@ import Providers from "./Providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const APP_NAME = "Weather App";
+const APP_DEFAULT_TITLE = "Weather App";
+const APP_TITLE_TEMPLATE = "%s - Weather App";
+const APP_DESCRIPTION = "An app that displays weather data.";
+
 export const metadata: Metadata = {
-  title: "Weather App",
-  description: "An app that displays weather data",
+  icons: [
+    {
+      rel: "icon",
+      url: "/weather-icons/partly-cloudy.svg",
+      type: "image/svg+xml",
+    },
+  ],
+  applicationName: APP_NAME,
+  title: {
+    default: APP_DEFAULT_TITLE,
+    template: APP_TITLE_TEMPLATE,
+  },
+  description: APP_DESCRIPTION,
+  manifest: "/manifest.json",
+  themeColor: "#0891b2",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: APP_DEFAULT_TITLE,
+  },
+  formatDetection: {
+    telephone: false,
+  },
+  openGraph: {
+    type: "website",
+    siteName: APP_NAME,
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: {
+      default: APP_DEFAULT_TITLE,
+      template: APP_TITLE_TEMPLATE,
+    },
+    description: APP_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({

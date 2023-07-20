@@ -8,6 +8,7 @@ export default function WeatherImage(props: {
   width: number;
   height: number;
   className?: string;
+  priority?: boolean;
 }) {
   const imagePath = () => {
     var fixed_path: string = `/weather-icons/${
@@ -25,6 +26,7 @@ export default function WeatherImage(props: {
       className={props.className}
       width={props.width}
       height={props.height}
+      priority={props.priority}
     ></Image>
   );
 }

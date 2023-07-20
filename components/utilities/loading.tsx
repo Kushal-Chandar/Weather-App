@@ -6,7 +6,7 @@ export default function Loading() {
       <Image
         src={`tail-spin.svg`}
         alt={`Image of tail-spin`}
-        className="scale-150 mt-10"
+        className="scale-150 m-10"
         width={27}
         height={27}
       ></Image>

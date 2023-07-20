@@ -21,6 +21,7 @@ function CurrentWeather(props: {
           className="scale-150 my-1.5"
           is_day={is_day}
           weathercode={weathercode}
+          priority={true}
         />
         <div>{weather_conditions[weathercode].description}</div>
         <Temperature

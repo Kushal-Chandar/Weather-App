@@ -71,18 +71,11 @@ function WeatherBox(props: {
     refetchInterval: 1000 * 60 * 15, // automatically update every 15 mins
     staleTime: 1000 * 60 * 5, // data is made stale every 10 mins, will refetch if user on site
   });
-  if (!props.placeSearched) {
-    if (isErrorCity) {
-      return <Error error={errorCity as AxiosError} />;
-    }
-    if (isLoadingCity) {
-      return <Loading />;
-    }
-  }
-  if (isErrorData) {
+
+  if (isErrorData || isErrorCity) {
     return <Error error={errorData as AxiosError} />;
   }
-  if (isLoadingData) {
+  if (isLoadingData || isLoadingCity) {
     return <Loading />;
   }
 
@@ -95,10 +88,10 @@ function WeatherBox(props: {
       />
       <HourlyForecast data={data.hourly} is_celsius={props.is_celsius} />
       <DailyForecast data={data.daily} is_celsius={props.is_celsius} />
-      <div className="text-sm mt-5">{"LAST UPDATE: " + data.time}</div>
+      <div className="text-sm m-5">{"LAST UPDATE: " + data.time}</div>
       {!locationEnabled && (
         <button
-          className="border bg-neutral-200 text-neutral-800 w-full mt-5 rounded p-1"
+          className="border bg-neutral-200 text-neutral-800 w-full rounded p-1"
           onClick={() => {
             setLocationEnabled(true); // prevents rendering this button, make a new state??
           }}
