@@ -88,10 +88,10 @@ function WeatherBox(props: {
       />
       <HourlyForecast data={data.hourly} is_celsius={props.is_celsius} />
       <DailyForecast data={data.daily} is_celsius={props.is_celsius} />
-      <div className="text-sm m-5">{"LAST UPDATE: " + data.time}</div>
+      <div className="text-sm m-4">{"LAST UPDATE: " + data.time}</div>
       {!locationEnabled && (
         <button
-          className="border bg-neutral-200 text-neutral-800 w-full rounded p-1"
+          className="border bg-neutral-200 text-neutral-800 w-full rounded p-1 transition-all"
           onClick={() => {
             setLocationEnabled(true); // prevents rendering this button, make a new state??
           }}

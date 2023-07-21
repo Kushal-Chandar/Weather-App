@@ -4,6 +4,7 @@ import WeatherBox from "@/components/weather_box";
 import SearchBar from "@/components/search_bar";
 import { useEffect, useState } from "react";
 import TemperatureToggle from "@/components/weather_box/temperature/temperature_toggle";
+import { AiFillGithub } from "react-icons/ai";
 
 export default function App() {
   const [placeSearched, setPlaceSearched] = useState(false);
@@ -38,7 +39,7 @@ export default function App() {
         />
         {pwaPrompt && (
           <button
-            className="max-w-md h-full w-full bg-cyan-900 shadow-md rounded-lg p-6 flex flex-col justify-normal items-center gap-y-3"
+            className="max-w-md h-full w-full bg-cyan-900 shadow-md rounded-lg p-6 flex flex-col justify-normal items-center gap-y-3 transition"
             onClick={() => {
               setPWAPrompt(false);
             }}
@@ -53,6 +54,12 @@ export default function App() {
             <p className="text-xs hover:text-neutral-400">*Touch to close*</p>
           </button>
         )}
+        <a href="https://github.com/Kushal-Chandar/Weather-App" target="_blank">
+          <AiFillGithub
+            size={30}
+            className="mx-auto mt-3 hover:text-black transition"
+          />
+        </a>
       </div>
     </div>
   );
