@@ -9,24 +9,23 @@
 
 Weather App that fetches data from [open-meteo](https://open-meteo.com/en/docs) and renders the data in a good looking react interface.
 
-![Desktop](/media/Desktop.gif)
+**Deployed to vercel at** <https://weatherapp-kushal-chandar.vercel.app/>.
 
-Deployed to vercel at <https://weatherapp-kushal-chandar.vercel.app/>
+![Desktop](/media/Desktop.gif)
 
 ## PWA
 
 This is a Progressive Web App and can be installed on to your machine to get the experience of using a native application.
 
-### Android
+### Android and IOS
 
-![Android](/media/Android.gif)
-
-### IOS
-
-![IOS](/media/Iphone.gif)
+Android                        |IOS
+:-----------------------------:|:----------------------------:
+![Android](/media/Android1.jpg)|![IOS](/media/Iphone1.jpg)
+![Android](/media/Android2.jpg)|![IOS](/media/Iphone2.jpg)
 
 ## Credits
 
 - Reverse Geocoding API: <https://geocode.maps.co/>
 - Weather Information and AutoComplete API: <https://open-meteo.com/>
-- Weather ICONS: [Meteocons](https://bas.dev/work/meteocons)
+- Weather Icons: [Meteocons](https://bas.dev/work/meteocons)
